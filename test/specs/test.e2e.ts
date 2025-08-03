@@ -18,7 +18,7 @@ const checkoutCompletePage = new CheckoutCompletePage();
 const sideMenu = new SideMenu();
 const footer = new Footer();
 
-describe("", () => {
+describe("Login page pre-case", () => {
   beforeEach(async () => {
     await loginPage.open();
   });
@@ -42,7 +42,7 @@ describe("", () => {
   });
 });
 
-describe("Test workflow:", () => {
+describe("Login pre-case", () => {
   let itemPrice: number;
 
   beforeEach(async () => {
@@ -89,6 +89,13 @@ describe("Test workflow:", () => {
 
   it("Test 6 - Sorting", async () => {
     await footer.linksCheck();
+  });
+
+  it("Test 7 - Filter", async () => {
+    await productsPage.filterProductsAndCheck("az");
+    await productsPage.filterProductsAndCheck("za");
+    await productsPage.filterProductsAndCheck("lohi");
+    await productsPage.filterProductsAndCheck("hilo");
   });
 
   it("Test 8 - Valid Checkout", async () => {

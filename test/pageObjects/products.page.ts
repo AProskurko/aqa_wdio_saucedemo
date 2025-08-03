@@ -1,4 +1,5 @@
 import Page from "./page.ts";
+import { filterResults } from "../utils/fixtures.ts";
 class ProductsPage extends Page {
   private pageUrl: string = "https://www.saucedemo.com/inventory.html";
   private pageTitle: string = "Products";
@@ -17,11 +18,22 @@ class ProductsPage extends Page {
   private get shoppingCartIcon() {
     return $('[data-test="shopping-cart-link"]');
   }
+  private get itemName() {
+    return $('data-test="inventory-item-name"');
+  }
   private get allItemsList() {
     return $$('[data-test="inventory-item-name"]');
   }
   private get itemPrice() {
     return $('[data-test="inventory-item-price"]');
+  }
+
+  private get elementFilter() {
+    return $('[data-test="product-sort-container"]');
+  }
+
+  private get elementAllFilter() {
+    return $$('[data-test="product-sort-container"]');
   }
 
   public open() {
@@ -67,7 +79,7 @@ class ProductsPage extends Page {
     }
   }
 
-  async getPrice(): Promise<string> {
+  async getPrice() {
     return await this.itemPrice.getText();
   }
 
@@ -80,6 +92,26 @@ class ProductsPage extends Page {
       await expect(this.shoppingCartBadge).toHaveText(value.toString());
     } else {
       await expect(this.shoppingCartBadge).not.toExist();
+    }
+  }
+
+  async filterProductsAndCheck(option: "az" | "za" | "lohi" | "hilo") {
+    await this.elementFilter.selectByAttribute("value", option);
+    const firstItemInList = await this.allItemsList[0].getText();
+
+    switch (option) {
+      case "az":
+        await expect(firstItemInList).toEqual(filterResults.az);
+        break;
+      case "za":
+        await expect(firstItemInList).toEqual(filterResults.za);
+        break;
+      case "lohi":
+        await expect(firstItemInList).toEqual(filterResults.lohi);
+        break;
+      case "hilo":
+        await expect(firstItemInList).toEqual(filterResults.hilo);
+        break;
     }
   }
 }

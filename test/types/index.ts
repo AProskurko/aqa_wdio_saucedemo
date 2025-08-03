@@ -13,3 +13,10 @@ export interface FooterLinks {
     name: string;
     url: string;
 }
+
+export interface FilterResults {
+  az: string;
+  za: string;
+  lohi: string;
+  hilo: string;
+}
