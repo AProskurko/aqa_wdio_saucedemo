@@ -6,11 +6,8 @@ import CheckoutOverviewPage from "../pageObjects/checkoutOverview.page.ts";
 import CheckoutCompletePage from "../pageObjects/checkoutComplete.page.ts";
 import SideMenu from "../pageObjects/components/sideMenu.component.ts";
 import Footer from "../pageObjects/components/footer.components.ts";
-import { UserData } from "../types/index.ts";
 import { credentials } from "../utils/credentials.ts";
 import { itemList, userData } from "../utils/fixtures.ts";
-
-import { setTimeout } from "timers/promises";
 
 const loginPage = new LoginPage();
 const productsPage = new ProductsPage();
