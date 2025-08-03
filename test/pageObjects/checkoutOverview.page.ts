@@ -1,5 +1,4 @@
-import { $ } from '@wdio/globals'
-import Page from './page.ts';
+import Page from "./page.ts";
 
 class CheckoutOverviewPage extends Page {
   private pageUrl: string = "https://www.saucedemo.com/checkout-step-two.html";
@@ -16,8 +15,12 @@ class CheckoutOverviewPage extends Page {
     return $('[data-test="subtotal-label"]');
   }
 
-  private get finishButton(){
+  private get finishButton() {
     return $('[data-test="finish"]');
+  }
+
+  public open() {
+    return super.openPage("/checkout-step-two.html");
   }
 
   async pageVerification() {
@@ -36,8 +39,8 @@ class CheckoutOverviewPage extends Page {
   }
 
   async submit() {
-    await this.finishButton.click()
+    await this.finishButton.click();
   }
 }
 
-export default new CheckoutOverviewPage();
+export default CheckoutOverviewPage;

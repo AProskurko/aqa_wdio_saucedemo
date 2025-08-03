@@ -1,7 +1,3 @@
-import { $ } from '@wdio/globals'
-import { browser } from '@wdio/globals'
-
-
 export default class Page {
   private pageTitleElement() {
     return $('[data-test="title"]');

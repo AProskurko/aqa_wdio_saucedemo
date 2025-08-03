@@ -1,5 +1,4 @@
-import { $ } from '@wdio/globals'
-import Page from './page.ts';
+import Page from "./page.ts";
 
 class CartPage extends Page {
   private pageUrl: string = "https://www.saucedemo.com/cart.html";
@@ -13,17 +12,35 @@ class CartPage extends Page {
     return $('[data-test="checkout"]');
   }
 
+  private get alertEmptyCartVerification() {
+    return $('[data-test="alert"]');
+  }
+
+  public open() {
+    return super.openPage("/cart.html");
+  }
+
   async pageVerification() {
     await super.pageVerification(this.pageUrl, this.pageTitle);
   }
 
-  async CheckItem(itemName: string) {
+  async checkItem(itemName: string) {
     await expect(this.inventoryItemName).toHaveText(itemName);
+  }
+
+  async checkNoItemVisible() {
+    await expect(this.inventoryItemName).not.toBeDisplayed();
   }
 
   async clickCheckOutButton() {
     await this.checkOutButton.click();
   }
+
+  async verifyFailedCheckout() {
+    await this.pageVerification();
+    await expect(this.alertEmptyCartVerification).toBeDisabled();
+    await expect(this.alertEmptyCartVerification).toHaveText("'Cart is empty'");
+  }
 }
 
-export default new CartPage();
+export default CartPage;

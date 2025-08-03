@@ -1,5 +1,3 @@
-import { $ } from '@wdio/globals'
-
 class SideMenu {
   private aboutUrl: string = "https://saucelabs.com/";
 
@@ -25,11 +23,17 @@ class SideMenu {
     return $('[data-test="reset-sidebar-link"]');
   }
 
+  async sideMenuIsVisible() {
+    await expect(this.sideMenuFrame).toBeDisplayed();
+    await expect(this.allItemOption).toBeDisplayed();
+    await expect(this.aboutOption).toBeDisplayed();
+    await expect(this.logoutOption).toBeDisplayed();
+    await expect(this.resetAppOption).toBeDisplayed();
+  }
+
   async openSideMenu() {
-    const isVisible = await this.sideMenuFrame.isDisplayed();
-    if (!isVisible) {
-      await this.burgerButton.click();
-    }
+    await this.burgerButton.click();
+    await this.sideMenuIsVisible();
   }
 
   async closeSideMenu() {
@@ -39,16 +43,17 @@ class SideMenu {
     }
   }
 
-  async selectAllItems(){
-    await this.allItemOption.click()
+  async selectAllItems() {
+    await this.allItemOption.click();
   }
 
   async selectAbout() {
     await this.aboutOption.click();
   }
 
-  async verifyAboutUrl(){
-    await expect(browser).toHaveUrl(this.aboutUrl)
+  async verifyAboutHref() {
+    await expect(this.aboutOption).toBeDisplayed();
+    await expect(this.aboutOption).toHaveHref(this.aboutUrl);
   }
 
   async selectResetApp() {
@@ -60,4 +65,4 @@ class SideMenu {
   }
 }
 
-export default new SideMenu();
+export default SideMenu;

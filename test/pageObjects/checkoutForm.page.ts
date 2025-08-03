@@ -1,5 +1,4 @@
-import { $ } from '@wdio/globals'
-import Page from './page.ts';
+import Page from "./page.ts";
 
 class CheckoutFormPage extends Page {
   private pageUrl: string = "https://www.saucedemo.com/checkout-step-one.html";
@@ -19,6 +18,10 @@ class CheckoutFormPage extends Page {
 
   private get continueButton() {
     return $('[data-test="continue"]');
+  }
+
+  public open() {
+    return super.openPage("/checkout-step-one.html");
   }
 
   async pageVerification() {
@@ -42,4 +45,4 @@ class CheckoutFormPage extends Page {
   }
 }
 
-export default new CheckoutFormPage();
+export default CheckoutFormPage;

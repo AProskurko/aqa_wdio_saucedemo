@@ -1,5 +1,4 @@
-import { $ } from '@wdio/globals'
-import Page from './page.ts';
+import Page from "./page.ts";
 
 class CheckoutCompletePage extends Page {
   private pageUrl: string = "https://www.saucedemo.com/checkout-complete.html";
@@ -10,8 +9,12 @@ class CheckoutCompletePage extends Page {
   private get completeMessage() {
     return $('[data-test="complete-header"]');
   }
-  private get backHomeButton(){
+  private get backHomeButton() {
     return $('[data-test="back-to-products"]');
+  }
+
+  public open() {
+    return super.openPage("/checkout-complete.html");
   }
 
   async pageVerification() {
@@ -22,9 +25,9 @@ class CheckoutCompletePage extends Page {
     await expect(this.completeMessage).toHaveText(messageText);
   }
 
-  async clickBackHomeButton(){
-    await this.backHomeButton.click()
+  async clickBackHomeButton() {
+    await this.backHomeButton.click();
   }
 }
 
-export default new CheckoutCompletePage();
+export default CheckoutCompletePage;
