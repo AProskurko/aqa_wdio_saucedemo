@@ -39,7 +39,7 @@ class CartPage extends Page {
   async verifyFailedCheckout() {
     await this.pageVerification();
     await expect(this.alertEmptyCartVerification).toBeDisabled();
-    await expect(this.alertEmptyCartVerification).toHaveText("'Cart is empty'");
+    await expect(this.alertEmptyCartVerification).toHaveText("Cart is empty");
   }
 }
 
