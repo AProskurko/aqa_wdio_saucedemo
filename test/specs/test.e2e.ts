@@ -87,11 +87,11 @@ describe("Login pre-case", () => {
     await cartPage.checkItem(product);
   });
 
-  it("Test 6 - Sorting", async () => {
+  it("Test 6 - Footer", async () => {
     await footer.linksCheck();
   });
 
-  it("Test 7 - Filter", async () => {
+  it("Test 7 - Sorting", async () => {
     await productsPage.filterProductsAndCheck("az");
     await productsPage.filterProductsAndCheck("za");
     await productsPage.filterProductsAndCheck("lohi");
